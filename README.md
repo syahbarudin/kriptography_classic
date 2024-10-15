@@ -4,4 +4,5 @@ soal
 
 hasil encrypt dan decrypt
 
-![gambar](https://github.com/user-attachments/assets/ccab0e51-8f25-4000-a717-b19cb2e96403)
+![{4536810D-A652-43A3-BDA6-41B1D04B6144}](https://github.com/user-attachments/assets/249fa947-3f70-4ed1-9230-fd59d3949f1d)
+
