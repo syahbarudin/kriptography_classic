@@ -2,7 +2,7 @@
 def create_matrix(key):
     """Membuat matriks 5x5 untuk Playfair Cipher berdasarkan kunci yang diberikan."""
     matrix = []
-    alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ"  # Huruf I/J dianggap sama
+    alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ"  # I/J dianggap sama
     used_chars = set()
 
     # Menghapus karakter duplikat dari kunci dan membangun matriks
@@ -16,7 +16,6 @@ def create_matrix(key):
         if char not in used_chars:
             matrix.append(char)
 
-    # Mengubah daftar karakter menjadi matriks 5x5
     return [matrix[i:i + 5] for i in range(0, 25, 5)]
 
 # Langkah 2: Mencari posisi sebuah karakter dalam matriks
@@ -86,12 +85,25 @@ def encrypt_playfair(plaintext, key):
     return encrypted_text
 
 # Langkah 7: Dekripsi seluruh ciphertext menggunakan Playfair Cipher
+# Langkah 7: Dekripsi seluruh ciphertext menggunakan Playfair Cipher
 def decrypt_playfair(ciphertext, key):
     """Mendekripsi ciphertext menggunakan Playfair Cipher."""
     matrix = create_matrix(key)
     digrams = split_digrams(ciphertext)
     decrypted_text = ''.join(decrypt_digram(matrix, digram) for digram in digrams)
-    return decrypted_text
+
+    # Menghilangkan 'X' jika itu hasil dari penambahan 'X' saat enkripsi
+    final_text = []
+    i = 0
+    while i < len(decrypted_text):
+        if decrypted_text[i] == 'X' and (i == 0 or i == len(decrypted_text) - 1 or decrypted_text[i - 1] == decrypted_text[i + 1]):
+            # Jika 'X' berada di antara huruf yang sama atau di tepi, abaikan
+            i += 1
+            continue
+        final_text.append(decrypted_text[i])
+        i += 1
+
+    return ''.join(final_text)
 
 # Contoh penggunaan
 if __name__ == "__main__":
